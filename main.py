@@ -5,32 +5,9 @@ import json
 import csv
 
 FIELDS = [
-    'institution.displayName',
-    'institution.schoolType',
-    'institution.aliasNames',
-    'institution.state',
-    'institution.city',
-    'institution.zip',
-    'institution.region',
-    'institution.isPublic',
-    'institution.institutionalControl',
-    'institution.primaryPhotoCardThumb',
-    'ranking.displayRank',
-    'ranking.sortRank',
-    'ranking.isTied',
-    'searchData.actAvg.rawValue',
-    'searchData.percentReceivingAid.rawValue',
-    'searchData.acceptanceRate.rawValue',
-    'searchData.tuition.rawValue',
-    'searchData.hsGpaAvg.rawValue',
-    'searchData.engineeringRepScore.rawValue',
-    'searchData.parentRank.rawValue',
-    'searchData.enrollment.rawValue',
-    'searchData.businessRepScore.rawValue',
-    'searchData.satAvg.rawValue',
-    'searchData.costAfterAid.rawValue',
-    'searchData.testAvgs.displayValue.0.value',
-    'searchData.testAvgs.displayValue.1.value'
+    'institition.name'
+    'major'
+    'institition.majorranking'
 ]
 
 DETAILED = False
@@ -69,7 +46,7 @@ def fetch_results_page(url, writer):
             row.append(traverse(school, field))
 
         if DETAILED:
-            resp = requests.get('https://www.usnews.com/best-colleges/' + traverse(school, 'institution.urlName') + '-'
+            resp = requests.get('https://www.usnews.com/best-graduate-schools/top-engineering-schools/eng-rankings' + traverse(school, 'institution.urlName') + '-'
                                 + traverse(school, 'institution.primaryKey'), headers=HEADERS)
             soup = BeautifulSoup(resp.text, 'html.parser')
             for field in DETAIL_FIELDS:
